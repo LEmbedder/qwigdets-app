@@ -13,6 +13,7 @@ class MyButton : public QWidget
     Q_OBJECT
 
 private:
+    QWidget *parent;
     bool isEnable;      //是否启用
     bool isSelected;    //当前是否为选中状态
     bool isAntiAliasing;//是否开启抗锯齿
@@ -34,10 +35,12 @@ private:
     void DrawBackRect(QPainter *painter, const QRectF &rect);
     void DrawText(QPainter *painter, int x, int y, const QString string);
     void draw_input(QPainter *painter, int button_widht, int button_heigth);
+    void init();
 protected:
     virtual void paintEvent(QPaintEvent* event);
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void mouseMoveEvent(QMouseEvent *event);
+    virtual void resizeEvent(QResizeEvent *event);
 
 
 public:

@@ -17,8 +17,22 @@
 */
 MyButton::MyButton(QWidget *parent) : QWidget(parent)
 {
-    buttonWidth = 200;
-    buttonHeight = 80;
+    this->parent = parent;
+    init();
+}
+void MyButton::init()
+{
+    if(parent == NULL)
+    {
+        buttonWidth = 200;
+        buttonHeight = 80;
+    }
+    else
+    {
+        buttonWidth = parent->width();
+        buttonHeight = parent->height();
+    }
+
     backgroundColorSelected = QColor(Qt::white);
     bordColorSelected = QColor(Qt::blue);
     button_label = "中心频率";
@@ -26,13 +40,19 @@ MyButton::MyButton(QWidget *parent) : QWidget(parent)
     isSelected = false;
     setMouseTracking(true);
     isEnable = true;
+    isAntiAliasing = true;
 
 }
-
 void MyButton::paintEvent(QPaintEvent *event)
 {
     QWidget::paintEvent(event);
     QPainter painter(this);
+
+    if (isAntiAliasing)
+    {
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    }
 
     if(isEnable)
     {
@@ -85,6 +105,14 @@ void MyButton::mouseMoveEvent(QMouseEvent *event)
     //backgroundColorSelected = QColor(Qt::green);
     update();
     return QWidget::mouseMoveEvent(event);
+}
+/*改变控件大小事件*/
+void MyButton::resizeEvent(QResizeEvent *event)
+{
+    buttonWidth = parent->width();
+    buttonHeight = parent->height();
+    update();
+    QWidget::resizeEvent(event);
 }
 
 /*
