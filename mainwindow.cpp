@@ -6,35 +6,34 @@
 
 #include <QVBoxLayout>
 #include <QGridLayout>
+#include <QDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //QWidget *main_widget = new QWidget(this);
-    //QVBoxLayout *mainlayout = new QVBoxLayout(main_widget);
+    //QWidget *widget = new QWidget;
+    //QVBoxLayout *mainlayout = new QVBoxLayout(widget);
 
     //QPushButton *pushButton = new QPushButton("button",this);
     //QSwitchButton *swithcbutton = new QSwitchButton(this);
     MyButton *mybutton = new MyButton(this);
     //mybutton->setDisabled(true);
-//    MyButton *mybutton2 = new MyButton;
+    mybutton->setButtonFontSize(15);
+    mybutton->setName("起始频率");
+    mybutton->setButtonFontColor(QColor(Qt::red));
+    //mybutton->setDisabled(true);
+    //mybutton->setDisabled(true);
 
-    //QPushButton *b1 = new QPushButton("button",this);
+//    QPushButton *b1 = new QPushButton("button");
 //    QPushButton *b2 = new QPushButton("butt");
+//    MyButton *b3 = new MyButton("bb",widget);
+//    MyButton *b4 = new MyButton("dd",widget);
+    //mainlayout->addWidget(b3);
+    //mainlayout->addWidget(b2);
 
-    //swithcbutton->SetButtonStyle(QSwitchButton::Rectage);
-    //setCentralWidget(mybutton);
-    //mainlayout->addWidget(b1,0,0);
-    //mainlayout->addWidget(b2,1,0);
-
-//    centralWidget()->layout()->addWidget(mybutton);
-//    centralWidget()->layout()->addWidget(mybutton2);
-//    centralWidget()->layout()->setSpacing(0);
     setCentralWidget(mybutton);
-    //mybutton->show();
-
     show();
 }
 
