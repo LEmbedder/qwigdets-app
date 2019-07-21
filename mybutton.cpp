@@ -1,8 +1,5 @@
 #include "mybutton.h"
 
-
-
-
 /*
  * @自定义两层的Button
  * @功能：
@@ -25,16 +22,16 @@ MyButton::MyButton(QString name ,QWidget *parent):QWidget(parent)
 }
 void MyButton::init()
 {
-    if(parent == NULL)
+    //if(parent == NULL)
     {
         buttonWidth = 200;
         buttonHeight = 80;
     }
-    else
-    {
-        buttonWidth = parent->width();
-        buttonHeight = parent->height();
-    }
+//    else
+//    {
+//        buttonWidth = parent->width();
+//        buttonHeight = parent->height();
+//    }
 
     backgroundColorNotSelected = QColor(Qt::white);
     backgroundColorSelected = QColor(Qt::darkGray);
@@ -81,14 +78,12 @@ void MyButton::paintEvent(QPaintEvent *event)
         DrawBackRect(&painter, QRectF(0, 0, buttonWidth, buttonHeight));//画矩形
 
         /*2button名字*/
-        QString test = labelName->text();
-        //QFont font;
-        QFontMetrics fm(font);
-        QRect rec = fm.boundingRect(test);
-        labelName->setGeometry((buttonWidth-rec.width())/2
+        QFontMetrics fm(labelName->font());
+        labelName->setGeometry((buttonWidth-fm.width(labelName->text()))/2
                                ,buttonHeight/6
                                ,labelName->width()+100
                                ,labelName->height());
+
     }
     else
     {
@@ -107,12 +102,14 @@ void MyButton::mousePressEvent(QMouseEvent *event)
         if(isSelected)
         {
             backgroundColorSelected = QColor(Qt::darkGray);
+            line_input->selectAll();
         }
         else//未选中状态
         {
             backgroundColorSelected = QColor(Qt::white);
+            //line_input->selectedText();
         }
-        line_input->selectAll();
+
 
 
         emit clicked();
@@ -125,22 +122,28 @@ void MyButton::mousePressEvent(QMouseEvent *event)
 */
 void MyButton::mouseMoveEvent(QMouseEvent *event)
 {
-    //backgroundColorSelected = QColor(Qt::green);
+    if(event)
+    if(geometry().contains(mapFromGlobal(QCursor::pos())))
+    {
+        isOn = true;
+        backgroundColorMoveOn = QColor(Qt::green);
+    }
+    else
+    {
+        isOn = false;
+    }
     update();
-    return QWidget::mouseMoveEvent(event);
+    QWidget::mouseMoveEvent(event);
 }
 /*改变控件大小事件*/
 void MyButton::resizeEvent(QResizeEvent *event)
 {
+    QWidget::resizeEvent(event);
     buttonWidth = parent->width();
     buttonHeight = parent->height();
     line_input->setGeometry(5,buttonHeight*2/4,buttonWidth - 10,buttonHeight/2-15);
 
-
-
-
     update();
-    QWidget::resizeEvent(event);
 }
 
 /*
@@ -150,11 +153,17 @@ void MyButton::DrawBackRect(QPainter* painter, const QRectF& rect)
 {
     if(isSelected)
     {
-
         painter->setBrush(QBrush(backgroundColorSelected));//设置画刷
     }
     else{
-        painter->setBrush(QBrush(backgroundColorNotSelected));//设置画刷
+        if(isOn)
+        {
+            painter->setBrush(QBrush(backgroundColorMoveOn));//设置画刷
+        }
+        else
+        {
+            painter->setBrush(QBrush(backgroundColorNotSelected));//设置画刷
+        }
     }
     painter->drawRoundRect(rect, 5, 5);
 
@@ -218,6 +227,7 @@ void MyButton::setDisabled(bool isDisable)
 */
 void MyButton::setButtonFontSize(int size)
 {
+    QFont font;
     font.setPointSize(size);
     labelName->setFont(font);
     update();
@@ -227,5 +237,7 @@ void MyButton::setButtonFontSize(int size)
 */
 void MyButton::setButtonFontColor(QColor color)
 {
-    labelName->setPalette(QPalette(color));
+    QPalette p;
+    p.setColor(QPalette::WindowText,color);
+    labelName->setPalette(p);
 }

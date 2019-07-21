@@ -24,9 +24,11 @@ private:
     QColor bordColorSelected;       //设置边框颜色
     int bord_size;                 //边框的线宽
     QColor backgroundColorSelected;//背景色
+    QColor backgroundColorMoveOn;//背景色
+    bool isOn;
     QColor backgroundColorNotSelected;//未选择的button背景色
 
-    QFont font;
+
     QLabel *labelName;
     QLineEdit *line_input;
     int buttonWidth;
