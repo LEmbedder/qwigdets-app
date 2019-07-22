@@ -8,36 +8,27 @@
  *              buttonWidth，buttonHeight，backgroundColorSelected，bordColorSelected
  *              button_label，bord_size
 */
-MyButton::MyButton(QWidget *parent) : QWidget(parent)
+MyButton::MyButton(QWidget *parent) : QPushButton(parent)
 {
     this->parent = parent;
     init();
 }
 
-MyButton::MyButton(QString name ,QWidget *parent):QWidget(parent)
+MyButton::MyButton(QString name ,QWidget *parent):QPushButton(parent)
 {
     this->parent = parent;
     init();
-    button_label = name;
+    labelName->setText(name);
 }
 void MyButton::init()
 {
-    //if(parent == NULL)
-    {
-        buttonWidth = 200;
-        buttonHeight = 80;
-    }
-//    else
-//    {
-//        buttonWidth = parent->width();
-//        buttonHeight = parent->height();
-//    }
 
+    buttonWidth = 200;
+    buttonHeight = 80;
     backgroundColorNotSelected = QColor(Qt::white);
     backgroundColorSelected = QColor(Qt::darkGray);
     bordColorSelected = QColor(Qt::blue);
     bord_size = 3;
-    button_label = "中心频率";
     isSelected = false;
     setMouseTracking(true);
     isEnable = true;
@@ -45,8 +36,7 @@ void MyButton::init()
 
     /*button名字*/
     labelName = new QLabel(this);
-    labelName->setText(button_label);
-
+    labelName->setText("中心频率");
 
     /*输入框里的字*/
     line_input = new QLineEdit(this);
@@ -57,10 +47,11 @@ void MyButton::init()
     /*父控件响应子控件事件*/
     line_input->setAttribute(Qt::WA_TransparentForMouseEvents);
 
+    isOn = false;
 }
 void MyButton::paintEvent(QPaintEvent *event)
 {
-    QWidget::paintEvent(event);
+    QPushButton::paintEvent(event);
     QPainter painter(this);
 
     if (isAntiAliasing)
@@ -71,24 +62,23 @@ void MyButton::paintEvent(QPaintEvent *event)
 
     if(isEnable)
     {
-
         /*1 画边框*/
         QPen pen(bordColorSelected,bord_size);//颜色，线宽
         painter.setPen(pen);
-        DrawBackRect(&painter, QRectF(0, 0, buttonWidth, buttonHeight));//画矩形
-
-        /*2button名字*/
-        QFontMetrics fm(labelName->font());
-        labelName->setGeometry((buttonWidth-fm.width(labelName->text()))/2
-                               ,buttonHeight/6
-                               ,labelName->width()+100
-                               ,labelName->height());
+    }
+    else{
+        bordColorNotSelected = QColor(Qt::gray);
+        QPen pen(bordColorNotSelected,bord_size);//颜色，线宽
+        painter.setPen(pen);
 
     }
-    else
-    {
-
-    }
+    DrawBackRect(&painter, QRectF(0, 0, buttonWidth, buttonHeight));//画矩形
+    /*2button名字*/
+    QFontMetrics fm(labelName->font());
+    labelName->setGeometry((buttonWidth-fm.width(labelName->text()))/2
+                           ,buttonHeight/6
+                           ,labelName->width()+100
+                           ,labelName->height());
 
 }
 /*点击事件*/
@@ -106,11 +96,9 @@ void MyButton::mousePressEvent(QMouseEvent *event)
         }
         else//未选中状态
         {
-            backgroundColorSelected = QColor(Qt::white);
+            backgroundColorNotSelected = QColor(Qt::white);
             //line_input->selectedText();
         }
-
-
 
         emit clicked();
         emit clicked(isSelected);//是否选中
@@ -122,16 +110,15 @@ void MyButton::mousePressEvent(QMouseEvent *event)
 */
 void MyButton::mouseMoveEvent(QMouseEvent *event)
 {
-    if(event)
-    if(geometry().contains(mapFromGlobal(QCursor::pos())))
-    {
-        isOn = true;
-        backgroundColorMoveOn = QColor(Qt::green);
-    }
-    else
-    {
-        isOn = false;
-    }
+//    if(geometry().contains(mapFromGlobal(QCursor::pos())))
+//    {
+//        isOn = true;
+//        backgroundColorMoveOn = QColor(Qt::green);
+//    }
+//    else
+//    {
+//        isOn = false;
+//    }
     update();
     QWidget::mouseMoveEvent(event);
 }
@@ -139,10 +126,7 @@ void MyButton::mouseMoveEvent(QMouseEvent *event)
 void MyButton::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
-    buttonWidth = parent->width();
-    buttonHeight = parent->height();
     line_input->setGeometry(5,buttonHeight*2/4,buttonWidth - 10,buttonHeight/2-15);
-
     update();
 }
 
@@ -212,7 +196,7 @@ void MyButton::setButtonBordColorAndSize(QColor color , int size)
 */
 void MyButton::setName(QString name)
 {
-    button_label = name;
+    labelName->setText(name);
 }
 /*
  * @设置控件不可用
@@ -236,8 +220,8 @@ void MyButton::setButtonFontSize(int size)
  * @设置button名字颜色
 */
 void MyButton::setButtonFontColor(QColor color)
-{
-    QPalette p;
+{    
     p.setColor(QPalette::WindowText,color);
     labelName->setPalette(p);
+    repaint();
 }
