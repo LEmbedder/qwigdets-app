@@ -20,7 +20,6 @@ private:
     bool isEnable;      //是否启用
     bool isSelected;    //当前是否为选中状态
     bool isAntiAliasing;//是否开启抗锯齿
-    //QString button_label; //按键的功能标题
     QColor bordColorSelected;       //设置边框颜色
     QColor bordColorNotSelected;       //设置边框颜色
     int bord_size;                 //边框的线宽
@@ -34,7 +33,7 @@ private:
     QLineEdit *line_input;
     int buttonWidth;
     int buttonHeight;
-    QPalette p;
+
     void DrawBackRect(QPainter *painter, const QRectF &rect);
     void DrawText(QPainter *painter, int x, int y, const QString string);
     void init();

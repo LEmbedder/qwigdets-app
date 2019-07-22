@@ -30,18 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     mainlayout->addWidget(mybutton2);
     mybutton2->setFixedSize(200,80);
 
-    //setLayout(mainlayout);
 
-    mainlayout->addWidget(mybutton);
-    mainlayout->addWidget(b1);
-    mainlayout->addWidget(mybutton2);
-//    QPushButton *b2 = new QPushButton("butt");
-//    MyButton *b3 = new MyButton("bb",widget);
-//    MyButton *b4 = new MyButton("dd",widget);
-    //mainlayout->addWidget(b3);
-    //mainlayout->addWidget(b2);
-
-    this->setCentralWidget(widget);
+    setCentralWidget(widget);
     widget->show();
     show();
 

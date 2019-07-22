@@ -66,14 +66,15 @@ void MyButton::paintEvent(QPaintEvent *event)
         QPen pen(bordColorSelected,bord_size);//颜色，线宽
         painter.setPen(pen);
     }
-    else{
+    else//不能使用时的颜色
+    {
         bordColorNotSelected = QColor(Qt::gray);
         QPen pen(bordColorNotSelected,bord_size);//颜色，线宽
         painter.setPen(pen);
 
     }
     DrawBackRect(&painter, QRectF(0, 0, buttonWidth, buttonHeight));//画矩形
-    /*2button名字*/
+    /*2button名字位置*/
     QFontMetrics fm(labelName->font());
     labelName->setGeometry((buttonWidth-fm.width(labelName->text()))/2
                            ,buttonHeight/6
@@ -87,7 +88,6 @@ void MyButton::mousePressEvent(QMouseEvent *event)
     if (isEnable)
     {
         QWidget::mousePressEvent(event);
-
         isSelected = !isSelected;
         if(isSelected)
         {
@@ -97,7 +97,7 @@ void MyButton::mousePressEvent(QMouseEvent *event)
         else//未选中状态
         {
             backgroundColorNotSelected = QColor(Qt::white);
-            //line_input->selectedText();
+            line_input->setCursorPosition(0);
         }
 
         emit clicked();
@@ -120,7 +120,7 @@ void MyButton::mouseMoveEvent(QMouseEvent *event)
 //        isOn = false;
 //    }
     update();
-    QWidget::mouseMoveEvent(event);
+    QPushButton::mouseMoveEvent(event);
 }
 /*改变控件大小事件*/
 void MyButton::resizeEvent(QResizeEvent *event)
@@ -142,11 +142,11 @@ void MyButton::DrawBackRect(QPainter* painter, const QRectF& rect)
     else{
         if(isOn)
         {
-            painter->setBrush(QBrush(backgroundColorMoveOn));//设置画刷
+            painter->setBrush(QBrush(backgroundColorMoveOn));
         }
         else
         {
-            painter->setBrush(QBrush(backgroundColorNotSelected));//设置画刷
+            painter->setBrush(QBrush(backgroundColorNotSelected));
         }
     }
     painter->drawRoundRect(rect, 5, 5);
@@ -221,7 +221,7 @@ void MyButton::setButtonFontSize(int size)
 */
 void MyButton::setButtonFontColor(QColor color)
 {    
-    p.setColor(QPalette::WindowText,color);
+    QPalette p;
+    p.setColor(QPalette::ButtonText,color);
     labelName->setPalette(p);
-    repaint();
 }
