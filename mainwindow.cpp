@@ -3,6 +3,7 @@
 #include "qswitchbutton.h"
 #include <QPushButton>
 #include "mybutton.h"
+#include "mybutton2.h"
 
 #include <QVBoxLayout>
 #include <QGridLayout>
@@ -24,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QPushButton *b1 = new QPushButton("button");
 
-    MyButton *mybutton2 = new MyButton();
+    MyButton2 *mybutton2 = new MyButton2();
     mainlayout->addWidget(mybutton);
     mainlayout->addWidget(b1);
     mainlayout->addWidget(mybutton2);

@@ -26,10 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     mybutton.cpp \
-    qswitchbutton.cpp
+    qswitchbutton.cpp \
+    mybutton2.cpp \
+    littlebutton.cpp
 
 HEADERS  += mainwindow.h \
     mybutton.h \
-    qswitchbutton.h
+    qswitchbutton.h \
+    mybutton2.h \
+    littlebutton.h
 
 FORMS    += mainwindow.ui
