@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QDialog>
+#include <QComboBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     QWidget *widget = new QWidget(this);
     QVBoxLayout *mainlayout = new QVBoxLayout(widget);
+
     MyButton *mybutton = new MyButton();
     //mybutton->setDisabled(true);
     mybutton->setButtonFontSize(15);
@@ -26,10 +28,21 @@ MainWindow::MainWindow(QWidget *parent) :
     QPushButton *b1 = new QPushButton("button");
 
     MyButton2 *mybutton2 = new MyButton2();
+    mybutton2->setFixedSize(200,80);
+    mybutton2->setButtonFontSize(15);
+
+    QComboBox *box = new QComboBox();
+    box->setFixedSize(200,40);
+    QFont font;
+    font.setPointSize(15);
+    box->setFont(font);
+    box->addItem("频率");
+    box->addItem("频谱");
+
     mainlayout->addWidget(mybutton);
     mainlayout->addWidget(b1);
     mainlayout->addWidget(mybutton2);
-    mybutton2->setFixedSize(200,80);
+    mainlayout->addWidget(box);
 
 
     setCentralWidget(widget);

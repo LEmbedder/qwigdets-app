@@ -11,6 +11,10 @@ class MyButton2 : public QPushButton
 {
     Q_OBJECT
 private:
+    enum button{
+        open,
+        close
+    };
     bool isEnable;                  //是否启用
     bool isSelected;                //当前是否为选中状态
     bool isAntiAliasing;            //是否开启抗锯齿
@@ -21,18 +25,22 @@ private:
     QColor backgroundColorMoveOn;   //背景色
     QColor backgroundColorNotSelected;//未选择的button背景色
     QLabel *labelName;              //按键名字
+    QLabel *labelFunName1;
+    QLabel *labelFunName2;
     int buttonWidth;
     int buttonHeight;
     void init();
-
+    enum button select;
     void DrawBackRect(QPainter *painter, const QRectF &rect);
 protected:
     virtual void paintEvent(QPaintEvent* event);
     virtual void mousePressEvent(QMouseEvent *event);
+    virtual void resizeEvent(QResizeEvent *event);
 
 public:
     explicit MyButton2(QWidget *parent = 0);
 
+    void setButtonFontSize(int size);
 signals:
 
 public slots:

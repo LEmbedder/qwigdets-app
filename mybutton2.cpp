@@ -21,6 +21,16 @@ void MyButton2::init()
     /*button名字*/
     labelName = new QLabel(this);
     labelName->setText("频率步进模式");
+
+    /*功能选择*/
+    labelFunName1 = new QLabel(this);
+    labelFunName2 = new QLabel(this);
+    labelFunName1->setText("开启");
+    labelFunName2->setText("关闭");
+    labelFunName1->setStyleSheet("background-color:lightgray");
+
+    select = open;
+
 }
 
 void MyButton2::DrawBackRect(QPainter *painter, const QRectF &rect)
@@ -71,6 +81,35 @@ void MyButton2::paintEvent(QPaintEvent *event)
 
 void MyButton2::mousePressEvent(QMouseEvent *event)
 {
+    if(select == open)
+    {
+        select = close;
+        labelFunName1->setStyleSheet("background-color:white");
+        labelFunName2->setStyleSheet("background-color:lightgray");
+    }
+    else//未选中状态
+    {
+        select = open;
+        labelFunName1->setStyleSheet("background-color:lightgray");
+        labelFunName2->setStyleSheet("background-color:white");
 
+    }
+    emit clicked();
+    emit clicked(select);//是否选中
 }
 
+void MyButton2::resizeEvent(QResizeEvent *event)
+{
+    labelFunName1->setGeometry(buttonWidth/4,buttonHeight*1/2,buttonWidth/8,buttonHeight/2-15);
+    labelFunName2->setGeometry(buttonWidth*2/3,buttonHeight*1/2,buttonWidth/8,buttonHeight/2-15);
+}
+/*
+ * @设置button名字字体大小
+*/
+void MyButton2::setButtonFontSize(int size)
+{
+    QFont font;
+    font.setPointSize(size);
+    labelName->setFont(font);
+    update();
+}

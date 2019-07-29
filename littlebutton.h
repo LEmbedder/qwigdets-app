@@ -6,9 +6,13 @@
 
 class LittleButton : public QWidget
 {
-public:
+    Q_OBJECT
+private:
     QLabel name;
-    LittleButton(QWidget *parent);
+
+public:
+    explicit LittleButton(QWidget *parent = 0);
+protected:
 };
 
 #endif // LITTLEBUTTON_H
