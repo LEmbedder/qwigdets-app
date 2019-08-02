@@ -26,7 +26,13 @@ void MyButton::init()
     buttonWidth = 200;
     buttonHeight = 80;
     backgroundColorNotSelected = QColor(Qt::white);
-    backgroundColorSelected = QColor(Qt::darkGray);
+    //backgroundColorSelected = QColor(Qt::darkGray);
+    setStyleSheet("QPushButton{background-image:url(:/image/1.png);}"
+                  "QPushButton:hover{background-image:url(:/image/2.png);}"
+                  "QPushButton:pressed{background-image:url(:/image/3.png);}"
+                  "QPushButton{border-radius:20px;}"
+                  "QPushButton:focus{outline:none};");
+
     bordColorSelected = QColor(Qt::blue);
     bord_size = 3;
     isSelected = false;
@@ -65,6 +71,7 @@ void MyButton::paintEvent(QPaintEvent *event)
         /*1 画边框*/
         QPen pen(bordColorSelected,bord_size);//颜色，线宽
         painter.setPen(pen);
+
     }
     else//不能使用时的颜色
     {
@@ -87,16 +94,18 @@ void MyButton::mousePressEvent(QMouseEvent *event)
 {
     if (isEnable)
     {
-        QWidget::mousePressEvent(event);
+        //QWidget::mousePressEvent(event);
+        QPushButton::mousePressEvent(event);
         isSelected = !isSelected;
         if(isSelected)
         {
-            backgroundColorSelected = QColor(Qt::darkGray);
+            //backgroundColorSelected = QColor(Qt::darkGray);
             line_input->selectAll();
+            //setStyleSheet("QPushButton{background-image:url(:/image/3.png);}");
         }
         else//未选中状态
         {
-            backgroundColorNotSelected = QColor(Qt::white);
+            //backgroundColorNotSelected = QColor(Qt::white);
             line_input->setCursorPosition(0);
         }
 
@@ -149,7 +158,7 @@ void MyButton::DrawBackRect(QPainter* painter, const QRectF& rect)
             painter->setBrush(QBrush(backgroundColorNotSelected));
         }
     }
-    painter->drawRoundRect(rect, 5, 5);
+    //painter->drawRoundRect(rect, 5, 5);
 
 }
 /*

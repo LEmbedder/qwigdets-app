@@ -37,3 +37,6 @@ HEADERS  += mainwindow.h \
     littlebutton.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    image/image.qrc
