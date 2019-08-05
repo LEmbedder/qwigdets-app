@@ -30,9 +30,9 @@ void MyButton::creatNewObject(void)
 */
 void MyButton::setIcons(QString iconNormal, QString iconPress,QString iconHover)
 {
-    this->iconNormal = iconNormal;
-    this->iconPress = iconPress;
-    this->iconHover = iconHover;
+    this->iconNormal.addFile(iconNormal);
+    this->iconPress.addFile(iconPress);
+    this->iconHover.addFile(iconHover);
     update();
 }
 void MyButton::init()
@@ -40,8 +40,7 @@ void MyButton::init()
     /*初始状态*/
     buttonWidth = 200;
     buttonHeight = 80;
-    setStyleSheet("QPushButton{border-radius:10px;}"
-                  "QPushButton:focus{outline:none};");
+    setFlat(true);//去掉边框
 
     isSelected = false;
     //setMouseTracking(true);
@@ -66,17 +65,18 @@ void MyButton::paintEvent(QPaintEvent *event)
     if(isEnable)
     {
         if(isSelected)
-        {
-            icon.addFile(iconPress);
+        {            
+            setIcon(iconPress);
+
         }
         else{
             if(isEnterEvent)
             {
-                icon.addFile(iconHover);
+                setIcon(iconHover);
             }
             else
             {
-                icon.addFile(iconNormal);
+                setIcon(iconNormal);
             }
         }
 
@@ -85,7 +85,7 @@ void MyButton::paintEvent(QPaintEvent *event)
     {
 
     }
-    setIcon(icon);
+
     setIconSize(QSize(buttonWidth,buttonHeight));
     /*2button名字位置*/
     QFontMetrics fm(labelName->font());
@@ -112,7 +112,6 @@ void MyButton::mousePressEvent(QMouseEvent *event)
         {
             line_input->setCursorPosition(0);
         }
-        emit clicked();
         emit clicked(isSelected);//是否选中
     }
     update();

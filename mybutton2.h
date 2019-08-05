@@ -6,41 +6,40 @@
 #include <QLabel>
 #include <QColor>
 #include <QPainter>
-
+#include <QIcon>
 class MyButton2 : public QPushButton
 {
     Q_OBJECT
 private:
-    enum button{
-        open,
-        close
-    };
+
     bool isEnable;                  //是否启用
     bool isSelected;                //当前是否为选中状态
-    bool isAntiAliasing;            //是否开启抗锯齿
-    QColor bordColorSelected;       //设置边框颜色
-    QColor bordColorNotSelected;    //设置边框颜色
-    int bord_size;                  //边框的线宽
-    QColor backgroundColorSelected; //背景色
-    QColor backgroundColorMoveOn;   //背景色
-    QColor backgroundColorNotSelected;//未选择的button背景色
     QLabel *labelName;              //按键名字
     QLabel *labelFunName1;
     QLabel *labelFunName2;
     int buttonWidth;
     int buttonHeight;
+    bool select;
+    bool isEnterEvent;
+    QIcon iconNormal,iconPress,iconHover;//背景图片
+
+private:
     void init();
-    enum button select;
-    void DrawBackRect(QPainter *painter, const QRectF &rect);
+    void creatNewObject();
 protected:
     virtual void paintEvent(QPaintEvent* event);
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void resizeEvent(QResizeEvent *event);
 
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
 public:
     explicit MyButton2(QWidget *parent = 0);
 
     void setButtonFontSize(int size);
+    void setIcons(QString iconNormal = 0, QString iconPress = 0, QString iconHover = 0);
+    void setFixedSize(int w, int h);
+    void setLabelNumbel(QString labelNumbel1, QString labelNumbel2);
 signals:
 
 public slots:

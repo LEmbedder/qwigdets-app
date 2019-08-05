@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mybutton->setButtonFontSize(15);
     mybutton->setButtonFontColor(QColor(Qt::red));
     mybutton->setFixedSize(200,80);
-    //mybutton->setb
+    connect(mybutton,SIGNAL(clicked()),this,SLOT(ppp()));
 
 
 
@@ -32,8 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QPushButton *b1 = new QPushButton("button");
 
     MyButton2 *mybutton2 = new MyButton2();
-    mybutton2->setFixedSize(200,80);
+    mybutton2->setIcons(tr("image/1.png"),tr("image/2.png"),tr("image/3.png"));
     mybutton2->setButtonFontSize(15);
+    mybutton2->setFixedSize(200,80);
 
     QComboBox *box = new QComboBox();
     box->setFixedSize(200,40);
@@ -55,7 +56,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 }
-
+void MainWindow::ppp()
+{
+    qDebug("hehe");
+}
 MainWindow::~MainWindow()
 {
     delete ui;

@@ -20,8 +20,7 @@ class MyButton : public QPushButton
 private:
     bool isEnable;      //是否启用
     bool isSelected;    //当前是否为选中状态
-    QIcon icon;         //设置背景图片
-    QString iconNormal,iconPress,iconHover;//背景图片路径
+    QIcon iconNormal,iconPress,iconHover;//
     bool isEnterEvent;
     QLabel *labelName;
     QLineEdit *line_input;
@@ -55,8 +54,7 @@ signals:
      * @brief       button点击信号
      * @param[in]   is_selected 当前是否选中
      */
-    void clicked();
-    void clicked(bool is_selected);
+    void clicked(bool isSelected);
 public slots:
 };
 
