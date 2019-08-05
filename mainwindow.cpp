@@ -9,7 +9,7 @@
 #include <QGridLayout>
 #include <QDialog>
 #include <QComboBox>
-
+#include <QIcon>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -18,12 +18,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget *widget = new QWidget(this);
     QVBoxLayout *mainlayout = new QVBoxLayout(widget);
 
-    MyButton *mybutton = new MyButton();
-    //mybutton->setDisabled(true);
+    MyButton *mybutton = new MyButton("起始频率");
+    mybutton->setIcons(tr("image/1.png"),tr("image/2.png"),tr("image/3.png"));
+    //mybutton->setEnabled(false);
     mybutton->setButtonFontSize(15);
-    mybutton->setName("起始频率");
     mybutton->setButtonFontColor(QColor(Qt::red));
     mybutton->setFixedSize(200,80);
+    //mybutton->setb
+
+
+
 
     QPushButton *b1 = new QPushButton("button");
 
