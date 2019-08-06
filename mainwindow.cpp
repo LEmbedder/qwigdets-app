@@ -52,7 +52,8 @@ MainWindow::MainWindow(QWidget *parent) :
     mainlayout->addWidget(b1);
     mainlayout->addWidget(mybutton2);
 //    mainlayout->addWidget(box);
-    FormVirtualKeyboard *key = new FormVirtualKeyboard();
+    key = new FormVirtualKeyboard();
+    key->close();
 
     setCentralWidget(widget);
     widget->show();
@@ -63,7 +64,8 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 void MainWindow::ppp()
 {
-    qDebug("hehe");
+    //qDebug("hehe");
+    key->show();
 }
 MainWindow::~MainWindow()
 {
