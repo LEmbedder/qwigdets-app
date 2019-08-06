@@ -10,6 +10,10 @@
 #include <QDialog>
 #include <QComboBox>
 #include <QIcon>
+#include "mycombobox.h"
+
+#include "formvirtualkeyboard.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -36,23 +40,24 @@ MainWindow::MainWindow(QWidget *parent) :
     mybutton2->setButtonFontSize(15);
     mybutton2->setFixedSize(200,80);
 
-    QComboBox *box = new QComboBox();
-    box->setFixedSize(200,40);
-    QFont font;
-    font.setPointSize(15);
-    box->setFont(font);
-    box->addItem("频率");
-    box->addItem("频谱");
+//    MyComboBox *box = new MyComboBox();
+//    box->setFixedSize(200,40);
+//    QFont font;
+//    font.setPointSize(15);
+//    box->setFont(font);
+//    box->addItem("频率");
+//    box->addItem("频谱");
 
     mainlayout->addWidget(mybutton);
     mainlayout->addWidget(b1);
     mainlayout->addWidget(mybutton2);
-    mainlayout->addWidget(box);
-
+//    mainlayout->addWidget(box);
+    FormVirtualKeyboard *key = new FormVirtualKeyboard();
 
     setCentralWidget(widget);
     widget->show();
     show();
+
 
 
 }

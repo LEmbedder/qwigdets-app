@@ -40,8 +40,9 @@ void MyButton::init()
     /*初始状态*/
     buttonWidth = 200;
     buttonHeight = 80;
+    setStyleSheet("padding: -2px");
     setFlat(true);//去掉边框
-
+    //setStyleSheet("QPushButton{outline:none;}");
     isSelected = false;
     //setMouseTracking(true);
     isEnable = true;
@@ -92,8 +93,8 @@ void MyButton::paintEvent(QPaintEvent *event)
     labelName->setFixedSize(fm.size(Qt::TextSingleLine,labelName->text()));
     labelName->setGeometry((buttonWidth-fm.width(labelName->text()))/2
                            ,buttonHeight/6
-                           ,labelName->width()+100
-                           ,labelName->height());
+                           ,fm.width(labelName->text())
+                           ,fm.height());
 
 }
 /*点击事件*/

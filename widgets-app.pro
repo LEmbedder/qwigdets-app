@@ -28,15 +28,22 @@ SOURCES += main.cpp\
     mybutton.cpp \
     qswitchbutton.cpp \
     mybutton2.cpp \
-    littlebutton.cpp
+    littlebutton.cpp \
+    mycombobox.cpp \
+    myvirtualkeyboard.cpp \
+    formvirtualkeyboard.cpp
 
 HEADERS  += mainwindow.h \
     mybutton.h \
     qswitchbutton.h \
     mybutton2.h \
-    littlebutton.h
+    littlebutton.h \
+    mycombobox.h \
+    myvirtualkeyboard.h \
+    formvirtualkeyboard.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    formvirtualkeyboard.ui
 
 RESOURCES += \
     image/image.qrc

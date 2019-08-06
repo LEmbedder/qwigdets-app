@@ -15,6 +15,12 @@ void MyButton2::init()
 {
     buttonWidth = 200;
     buttonHeight = 80;
+    //setFocusPolicy(Qt::NoFocus);
+    setStyleSheet("padding: -2px");
+    //setStyleSheet("outline:none;");
+    setStyleSheet("QPushButton{border-radius: 20px; } "
+                  "padding: -2px;"
+                   );
     setFlat(true);//去掉边框
 
     isSelected = false;
@@ -83,9 +89,8 @@ void MyButton2::paintEvent(QPaintEvent *event)
     QFontMetrics fm(labelName->font());
     labelName->setGeometry((buttonWidth-fm.width(labelName->text()))/2
                            ,buttonHeight/6
-                           ,labelName->width()+100
-                           ,labelName->height());
-
+                           ,fm.width(labelName->text())
+                           ,fm.height());
 
 }
 
