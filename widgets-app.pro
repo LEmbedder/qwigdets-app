@@ -31,7 +31,10 @@ SOURCES += main.cpp\
     littlebutton.cpp \
     mycombobox.cpp \
     myvirtualkeyboard.cpp \
-    formvirtualkeyboard.cpp
+    formvirtualkeyboard.cpp \
+    formbutton.cpp \
+    formbutton2.cpp \
+    formfrequencyspectrum.cpp
 
 HEADERS  += mainwindow.h \
     mybutton.h \
@@ -40,10 +43,16 @@ HEADERS  += mainwindow.h \
     littlebutton.h \
     mycombobox.h \
     myvirtualkeyboard.h \
-    formvirtualkeyboard.h
+    formvirtualkeyboard.h \
+    formbutton.h \
+    formbutton2.h \
+    formfrequencyspectrum.h
 
 FORMS    += mainwindow.ui \
-    formvirtualkeyboard.ui
+    formvirtualkeyboard.ui \
+    formbutton.ui \
+    formbutton2.ui \
+    formfrequencyspectrum.ui
 
 RESOURCES += \
     image/image.qrc

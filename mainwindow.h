@@ -20,6 +20,8 @@ public:
 
 public slots:
     void ppp();
+private slots:
+    void ppp1(QString string);
 private:
     Ui::MainWindow *ui;
 };
